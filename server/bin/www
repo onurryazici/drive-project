@@ -1,0 +1,177 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+const socketIo    = require("socket.io"); ///////////////////////
+var SessionManagement = require('../helper/session');/////////
+var app = require('../app');
+var debug = require('debug')('rfm-api:server');
+var http = require('http');
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3030');
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+///////////// SOCKET START ////////////
+const io = socketIo(server,{
+  	cors:{
+    	origin:"*", // BURAYA MESSENGER UI'nin çalıştığı ip:port gelecek (sunucunun)
+    	methods:["GET","POST"],
+    	credentials:true
+  	}
+});
+
+
+io.on("connection", (socket) => {
+  console.log("New client connected");
+
+  socket.on("USER_CONNECTED", (username)=>{
+    if(username!==null){
+      	SessionManagement.addSocket(username,socket.id)
+    }
+  })
+
+	socket.on("JOIN_ROOM", (username, roomPath) => {
+		const socketId = SessionManagement.getSocket(username)
+		socket.join(roomPath)
+		var rooms = io.sockets.adapter.rooms
+		var roomMaps = new Map(rooms)
+
+		let leaveFromRoom = [...roomMaps.entries()].forEach(({1:val,0:key})=>{
+			if(key!==roomPath && key!==socketId && [...val].includes(socketId))
+			{
+				/*console.log("***********")
+				console.log([...val])
+				console.log([...val].includes(socketId))
+				console.log(key)*/
+				socket.leave(key)
+				//console.log(roomMaps)
+			}
+		})
+		leaveFromRoom;
+	})
+
+	socket.on("CREATE_FOLDER", (newFolderName, roomPath) => {
+		socket.broadcast.to(roomPath).emit("SOMEONE_HAS_CREATED_FOLDER", newFolderName)
+	})
+
+	socket.on("DELETE_ITEMS", (deletedItems, roomPath) => {
+		socket.broadcast.to(roomPath).emit("SOMEONE_HAS_DELETED_ITEMS", deletedItems)
+	})
+
+	socket.on("RENAME_ITEM", (oldName, newName, roomPath) => {
+		socket.broadcast.to(roomPath).emit("SOMEONE_HAS_RENAMED_ITEM", oldName, newName)
+	})
+
+	socket.on("UPLOAD_ITEM", (itemName,roomPath) => {
+		socket.broadcast.to(roomPath).emit("SOMEONE_HAS_UPLOADED_ITEM", itemName)
+	})
+
+	socket.on("MOVE_ITEM", (fromPath, toPath, movedItems) => {
+		console.log("from path " + fromPath)
+		console.log("to path " + toPath)
+		Array.from(movedItems).forEach((itemName)=>{
+			socket.broadcast.to(fromPath).emit("SOMEONE_HAS_MOVED_FROM_HERE", itemName)
+			socket.broadcast.to(toPath).emit("SOMEONE_HAS_MOVED_TO_HERE", itemName)
+		})
+	})
+
+	socket.on("UPDATE_PERMISSION", (roomPath) => {
+		
+	})
+})
+
+
+
+
+
+
+
+
+
+//////////// SOCKET END ///////////////
+
+
+
+
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}
+
+module.exports={
+  server
+}
