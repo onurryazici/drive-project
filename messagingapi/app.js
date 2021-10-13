@@ -13,7 +13,7 @@ const db          = require('./helper/db')
 const cors        = require('cors')
 const io          = socketIo(server,{
   cors:{
-    origin:"http://host.docker.internal:3000", // Your server ip OR WSL's ip 
+    origin:"http://localhost:3000", // Your server ip OR WSL's ip 
     methods:["GET","POST"],
     credentials:true
   }
