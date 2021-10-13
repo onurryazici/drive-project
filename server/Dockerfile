@@ -1,9 +1,6 @@
-FROM node:latest
+FROM node:alpine
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
-COPY ./ ./
+COPY ./package.json ./
 RUN npm i
-RUN apt-get update 
-EXPOSE 22
+COPY ./ ./
 CMD ["npm", "run", "start"]

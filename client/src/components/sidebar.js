@@ -11,8 +11,6 @@ import styles from '../assets/styles.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../assets/Style.css'
 function Sidebar( ) {
-    alert("message " + process.env.REACT_APP_HOST_NAME);
-    console.log(process.env);
     const API_URL="http://localhost:3030";
     const session = JSON.parse(sessionStorage.getItem('sessionObject'))
     const currentPage = useLocation().pathname
