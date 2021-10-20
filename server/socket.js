@@ -3,14 +3,14 @@ const { server } = require("./bin/www");
 
 const io = socketIo(server,{
     cors:{
-      origin:"http://host.docker.internal:3000", // Your server URL or WSL host's ip 
+      origin:"http://localhost:3000", // Your server URL or WSL host's ip 
       methods:["GET","POST"],
       credentials:true
     }
 });
 
 io.on("connection", (socket) => {
-    console.log("New client connected");
+    console.log("New client connected - x");
     /*socket.on("USER_CONNECTED", (username)=>{
       if(username!==null){
         SessionManagement.addClient(username,socket.id)

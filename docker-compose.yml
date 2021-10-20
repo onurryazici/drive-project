@@ -22,7 +22,7 @@ services:
       context: "./server"
     ports: 
       - "3030:3030"
-      - "22:22"
+      - "2222:2222"
     environment:
       - BACKEND_SERVER=host.docker.internal
     volumes:

@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 function Login(){
-    const API_URL=`http://localhost:3030`;
+    const API_URL=`http://host.docker.internal:3030`;
     const [usernameData, setUsernameData] = useState("");
     const [passwordData, setPasswordData] = useState("");
     const [loginDisabled, setLoginDisabled] = useState(true);

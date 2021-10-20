@@ -9,7 +9,7 @@ import axios from 'axios'
 import { useLocation } from 'react-router'
 
 function Messenger(){
-    const API_URL="http://localhost:3030";
+    const API_URL="http://host.docker.internal:3030";
     const session = JSON.parse(sessionStorage.getItem('sessionObject'))
     const currentPage = useLocation().pathname
     const [conversationList, setConversationList] = useState([])

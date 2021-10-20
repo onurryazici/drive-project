@@ -7,8 +7,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import logo from '../assets/images/logo.png'
 export default function NavbarMobile() {
-    alert(`başladı : ${process.env.REACT_APP_HOST_URL}`)
-    const API_URL=`http://${process.env.REACT_APP_HOST_URL}:3030`;
     const session = JSON.parse(sessionStorage.getItem('sessionObject'))
     const currentPage        = useLocation().pathname
     const driveActive        = currentPage === "/client/drive" ? "#ffc107" : "#fff"
@@ -29,7 +27,7 @@ export default function NavbarMobile() {
             MessengerSocket.on("INCOMING_MESSAGE",()=>{
                 setHaveUnreadMessage(true)
             })
-            axios.post(API_URL+"/api/protected/getConversationList", {
+            axios.post("http://host.docker.internal:3030/api/protected/getConversationList", {
                 loggedUser:session.data.username
             }).then((response)=>{
                 console.log(response.data.conversations)

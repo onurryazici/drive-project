@@ -11,7 +11,7 @@ import styles from '../assets/styles.module.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../assets/Style.css'
 function Sidebar( ) {
-    const API_URL="http://localhost:3030";
+    const API_URL="http://host.docker.internal:3030";
     const session = JSON.parse(sessionStorage.getItem('sessionObject'))
     const currentPage = useLocation().pathname
     const driveActive        = currentPage === "/client/drive" ? "sidenav-active" : ""

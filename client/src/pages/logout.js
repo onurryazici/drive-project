@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Redirect, useHistory } from 'react-router-dom'
 
 export default function Logout() {
-    const API_URL="http://localhost:3030";
+    const API_URL="http://host.docker.internal:3030";
     const token = localStorage.getItem("user-token")
     const history = useHistory();
     useEffect(() => {
