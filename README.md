@@ -28,10 +28,10 @@ We will test this project on WSL Ubuntu 20.04 LTS. Make sure your Docker Desktop
   `sudo apt update`</br>
   `sudo apt install openjdk-11-jdk-headless trash-cli acl`</br>
   
-- Edit sshd_config file with nano 
-`sudo nano /etc/ssh/sshd_config`
-`Port 22` 
-`PasswordAuthentication yes`
+- Edit sshd_config file with nano </br>
+`sudo nano /etc/ssh/sshd_config`</br>
+`Port 22` </br>
+`PasswordAuthentication yes`</br>
 - Restart SSH for changes
  `sudo service ssh restart`
 ![enter image description here](https://github.com/onurryazici/drive-project/blob/main/screenshots/src2.png)
