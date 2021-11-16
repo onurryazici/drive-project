@@ -2,7 +2,7 @@
 
 ## Demo
 
-[![Alternate Text]({image-url})]({https://github.com/onurryazici/drive-project/blob/main/screenshots/src3.mkv} "Link Title")
+[![Alternate Text]({image-url})]({https://github.com/onurryazici/drive-project/blob/main/screenshots/src3.mp4} "Link Title")
 
 ## Introduction
 In this project I have created simple cloud data storage with Linux Debian based systems. So you can upload your files, viewing images, sharing data with other Linux users and sending messages to other users. Also you are logging as Linux user with SSH, not a database user. I used password for authentication. But I don't recommend this. Use private RSA key instead password authentication or use fail2ban for preventing login failure attack
