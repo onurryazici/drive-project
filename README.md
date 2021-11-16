@@ -15,7 +15,7 @@ We will test this project on WSL Ubuntu 20.04 LTS. Make sure your Docker Desktop
 - Go to project root directory and run : `docker-compose up --build`
 
 - Go to `localhost:3000` and you will see login page
-![enter image description here](https://github.com/onurryazici/drive-project/blob/main/screenshots/sr1.png)
+![enter image description here](https://github.com/onurryazici/drive-project/blob/main/screenshots/src1.png)
 
 - On your WSL make sure SSH and PasswordAuthentication option is active
 - Open your WSL console with Ubuntu 20.04 LTS windows app and run these commands </br>
@@ -34,7 +34,7 @@ We will test this project on WSL Ubuntu 20.04 LTS. Make sure your Docker Desktop
 `PasswordAuthentication yes`
 - Restart SSH for changes
  `sudo service ssh restart`
-![enter image description here](https://github.com/onurryazici/drive-project/blob/main/screenshots/sr2.png)
+![enter image description here](https://github.com/onurryazici/drive-project/blob/main/screenshots/src2.png)
 If you can connect users via SSH you are good.
 
 ## Create User
