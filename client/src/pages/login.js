@@ -81,7 +81,7 @@ function Login(){
                 </div>
             </div>
             <div id="login-footer-version">
-                Datagram V 1.0.0
+                OData V 1.0.0
             </div>
         </div>
     );
