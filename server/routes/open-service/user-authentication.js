@@ -22,7 +22,7 @@ exports.userAuthentication = async function(req,res){
         
         client.connect({
             host              : process.env.BACKEND_SERVER, // This is your wsl or server ip. You can change on docker-compose file with "environment" var
-            port              : 2222,
+            port              : 22,
             username          : req.body.username,
             password          : req.body.password,
             keepaliveInterval : 30 * 1000, // 30 minutes for idle as milliseconds
