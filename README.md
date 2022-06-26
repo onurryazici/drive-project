@@ -27,7 +27,7 @@ We will test this project on WSL Ubuntu 20.04 LTS. Make sure your Docker Desktop
 
   `## For running Java executable scripts, trash and sharing data` </br>
   `sudo apt update`</br>
-  `sudo apt install openjdk-11-jdk-headless trash-cli acl`</br>
+  `sudo apt install openjdk-11-jdk-headless trash-cli acl zip`</br>
   
 - Edit sshd_config file with nano </br>
 `sudo nano /etc/ssh/sshd_config`</br>
