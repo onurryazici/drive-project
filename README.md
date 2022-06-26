@@ -21,6 +21,7 @@ We will test this project on WSL Ubuntu 20.04 LTS. Make sure your Docker Desktop
 - Open your WSL console with Ubuntu 20.04 LTS windows app and run these commands </br>
   `## Clean install for SSH`</br>
   `sudo apt remove openssh-server`</br>
+  `sudo apt-get update`</br>
   `sudo apt install openssh-server`</br>
 
 
